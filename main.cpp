@@ -21,6 +21,7 @@ void display_trip(list<Goat> trip);
 void search_trip(list<Goat> trip);
 void unique_trip(list<Goat> &trip);
 void double_ages(list<Goat> &trip);
+void senior_search(list<Goat> trip);
 int main_menu();
 
 int main() {
@@ -54,7 +55,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 9) {
+    while (sel != 10) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -87,6 +88,10 @@ int main() {
                 cout << "Doubling all ages..." << endl;
                 double_ages(trip);
                 break;
+            case 9:
+                cout << "Searching for seniors\n.";
+                senior_search(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -108,11 +113,12 @@ int main_menu() {
     cout << "[6] Remove any duplicate goats\n";
     cout << "[7] Search for a goat.\n";
     cout << "[8] Double all goats' ages.\n";
-    cout << "[9] Quit\n";
+    cout << "[9] Search for senior goats.\n";
+    cout << "[10] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 9) {
+    while (choice < 1 || choice > 10) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -169,6 +175,15 @@ void search_trip(list<Goat> trip) {
     if (!found) {
         cout << target << " not found. " << endl;
     }
+}
+
+void senior_search(list<Goat> trip) {
+    bool rSeniors = any_of(trip.begin(), trip.end(), [](Goat &g) { return g.get_age() >25;});
+    if (rSeniors) {
+        cout << "There are senior goats, of age greater than 25 years, on the trip" << endl;
+    }
+    else 
+        cout << "There are no senior goats on this trip." << endl;
 }
 
 void double_ages(list<Goat> &trip) {
