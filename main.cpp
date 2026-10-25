@@ -4,6 +4,9 @@
 #include <iomanip>
 #include <list>
 #include <algorithm>
+#include <cstdlib>
+#include <ctime>
+#include <string>
 #include "Goat.h"
 using namespace std;
 
@@ -15,6 +18,7 @@ void add_goat(list<Goat> &trip, string [], string []);
 void sort_trip(list<Goat> &trip);
 void reverse_trip(list<Goat> &trip);
 void display_trip(list<Goat> trip);
+void unique_trip(list<Goat> &trip);
 int main_menu();
 
 int main() {
@@ -48,7 +52,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 5) {
+    while (sel != 7) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -69,6 +73,11 @@ int main() {
             case 5:
                 cout << "Reversing trip.\n";
                 reverse_trip(trip);
+                break;
+            case 6:
+                cout << "Removing duplicate goats.\n";
+                unique_trip(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -87,11 +96,12 @@ int main_menu() {
     cout << "[3] List goats\n";
     cout << "[4] Sort goats\n";
     cout << "[5] Reversing goats\n";
-    cout << "[6] Quit\n";
+    cout << "[6] Remove any duplicate goats\n";
+    cout << "[7] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 6) {
+    while (choice < 1 || choice > 7) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -127,7 +137,11 @@ void reverse_trip(list<Goat> &trip) {
     cout << "Trip reversed." << endl;
 }
 
-
+void unique_trip(list<Goat> &trip) {
+    trip.sort();
+    auto newTrip = unique(trip.begin(), trip.end());
+    trip.erase(newTrip, trip.end());
+}
 void display_trip(list<Goat> trp) {
     int i = 1;
     for (auto gt: trp)
