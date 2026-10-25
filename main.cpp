@@ -143,6 +143,21 @@ void unique_trip(list<Goat> &trip) {
     auto newTrip = unique(trip.begin(), trip.end());
     trip.erase(newTrip, trip.end());
 }
+
+void search_trip(list<Goat> trip) {
+    string target;
+    cout << "Enter the name of the goat you are searching for: ";
+    getline(cin, target);
+    for (Goat g : trip) {
+        if (g.get_name() == target) {
+            cout << "Found " << target << "(" << g.get_age() << ", " << g.get_color() << ")" << endl;
+            break;
+        }
+        else 
+            cout << target << " not found. " << endl;
+    }
+}
+
 void display_trip(list<Goat> trp) {
     int i = 1;
     for (auto gt: trp)
