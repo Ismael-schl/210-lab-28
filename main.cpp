@@ -12,6 +12,7 @@ const int SZ_NAMES = 200, SZ_COLORS = 25;
 int select_goat(list<Goat> trip);
 void delete_goat(list<Goat> &trip);
 void add_goat(list<Goat> &trip, string [], string []);
+void sort_trip(list<Goat> &trip);
 void display_trip(list<Goat> trip);
 int main_menu();
 
@@ -46,7 +47,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 4) {
+    while (sel != 5) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -59,6 +60,10 @@ int main() {
             case 3:    
                 cout << "Displaying goat data.\n";
                 display_trip(trip);
+                break;
+            case 4: 
+                cout << "Sorting goats.";
+                sort_trip(trip);
                 break;
             default:
                 cout << "Invalid selection.\n";
@@ -76,11 +81,12 @@ int main_menu() {
     cout << "[1] Add a goat\n";
     cout << "[2] Delete a goat\n";
     cout << "[3] List goats\n";
-    cout << "[4] Quit\n";
+    cout << "[4] Sort goats\n";
+    cout << "[5] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 4) {
+    while (choice < 1 || choice > 5) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -105,6 +111,12 @@ void add_goat(list<Goat> &trip, string nms[], string cls[]) {
     trip.push_back(tmp);
     cout << "Goat added. New trip size: " << trip.size() << endl;
 }
+
+void sort_trip(list<Goat> &trip) {
+    trip.sort();
+    cout << "Trip sorted." << endl;
+}
+
 
 void display_trip(list<Goat> trp) {
     int i = 1;
