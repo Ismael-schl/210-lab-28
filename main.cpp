@@ -171,13 +171,10 @@ void search_trip(list<Goat> trip) {
     cout << "Enter the name of the goat you are searching for: ";
     cin >> target;
     bool found = false;
-    for (Goat g : trip) {
+    auto it = find_if(trip.begin(), trip.end(), [target](Goat &g))
         if (g.get_name() == target) {
             cout << "Found " << target << "(" << g.get_age() << ", " << g.get_color() << ")" << endl;
-            found  = true;
-            break;
-        }
-    }
+   
     if (!found) {
         cout << target << " not found. " << endl;
     }
