@@ -20,6 +20,7 @@ void reverse_trip(list<Goat> &trip);
 void display_trip(list<Goat> trip);
 void search_trip(list<Goat> trip);
 void unique_trip(list<Goat> &trip);
+void double_ages(list<Goat> &trip);
 int main_menu();
 
 int main() {
@@ -53,7 +54,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 8) {
+    while (sel != 9) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -82,6 +83,9 @@ int main() {
             case 7:
                 search_trip(trip);
                 break;
+            case 8:
+                cout << "Doubling all ages..." << endl;
+                double_ages(trip);
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -102,11 +106,12 @@ int main_menu() {
     cout << "[5] Reversing goats\n";
     cout << "[6] Remove any duplicate goats\n";
     cout << "[7] Search for a goat.\n";
+    cout << "[8] Double all goats' ages.\n";
     cout << "[8] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 8) {
+    while (choice < 1 || choice > 9) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -163,6 +168,11 @@ void search_trip(list<Goat> trip) {
     if (!found) {
         cout << target << " not found. " << endl;
     }
+}
+
+void double_ages(list<Goat> &trip) {
+    for_each(trip.begin(), trip.end(), [](Goat &g) {g.set_age(g.get_age() *2);});
+    cout << "All ages have been doubled." << endl;
 }
 
 void display_trip(list<Goat> trp) {
