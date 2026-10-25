@@ -18,6 +18,7 @@ void add_goat(list<Goat> &trip, string [], string []);
 void sort_trip(list<Goat> &trip);
 void reverse_trip(list<Goat> &trip);
 void display_trip(list<Goat> trip);
+void search_trip(list<Goat> trip);
 void unique_trip(list<Goat> &trip);
 int main_menu();
 
