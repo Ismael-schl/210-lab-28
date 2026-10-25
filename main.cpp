@@ -53,7 +53,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 7) {
+    while (sel != 8) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -79,6 +79,9 @@ int main() {
                 cout << "Removing duplicate goats.\n";
                 unique_trip(trip);
                 break;
+            case 7:
+                search_trip(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -98,11 +101,12 @@ int main_menu() {
     cout << "[4] Sort goats\n";
     cout << "[5] Reversing goats\n";
     cout << "[6] Remove any duplicate goats\n";
-    cout << "[7] Quit\n";
+    cout << "[7] Search for a goat.\n";
+    cout << "[8] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 7) {
+    while (choice < 1 || choice > 8) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -147,14 +151,17 @@ void unique_trip(list<Goat> &trip) {
 void search_trip(list<Goat> trip) {
     string target;
     cout << "Enter the name of the goat you are searching for: ";
-    getline(cin, target);
+    cin >> target;
+    bool found = false;
     for (Goat g : trip) {
         if (g.get_name() == target) {
             cout << "Found " << target << "(" << g.get_age() << ", " << g.get_color() << ")" << endl;
+            found  = true;
             break;
         }
-        else 
-            cout << target << " not found. " << endl;
+    }
+    if (!found) {
+        cout << target << " not found. " << endl;
     }
 }
 
