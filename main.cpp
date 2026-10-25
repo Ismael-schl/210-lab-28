@@ -1,7 +1,9 @@
+//Lab 28 | COMCSC 210 | Ismael Hadi
 #include <iostream>
 #include <fstream>
 #include <iomanip>
 #include <list>
+#include <algorithm>
 #include "Goat.h"
 using namespace std;
 
