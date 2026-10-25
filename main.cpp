@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <string>
+#include <numeric>
 #include "Goat.h"
 using namespace std;
 
@@ -22,6 +23,7 @@ void search_trip(list<Goat> trip);
 void unique_trip(list<Goat> &trip);
 void double_ages(list<Goat> &trip);
 void senior_search(list<Goat> trip);
+void sum_ages(list<Goat> trip);
 void clear_trip(list<Goat> &trip);
 int main_menu();
 
@@ -56,7 +58,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 11) {
+    while (sel != 12) {
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -97,6 +99,10 @@ int main() {
                 cout << "Clearing trip.\n";
                 clear_trip(trip);
                 break;
+            case 11:
+                cout <<"Summing ages.\n";
+                sum_ages(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -120,11 +126,12 @@ int main_menu() {
     cout << "[8] Double all goats' ages.\n";
     cout << "[9] Search for senior goats.\n";
     cout << "[10] Clear trip.\n";
-    cout << "[11] Quit\n";
+    cout << "[11] Sum all ages.\n";
+    cout << "[12] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 11) {
+    while (choice < 1 || choice > 12) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -170,20 +177,19 @@ void search_trip(list<Goat> trip) {
     string target;
     cout << "Enter the name of the goat you are searching for: ";
     cin >> target;
-    bool found = false;
-    auto it = find_if(trip.begin(), trip.end(), [target](Goat &g))
-        if (g.get_name() == target) {
-            cout << "Found " << target << "(" << g.get_age() << ", " << g.get_color() << ")" << endl;
-   
-    if (!found) {
-        cout << target << " not found. " << endl;
+    auto it = find_if(trip.begin(), trip.end(), [target](Goat &g){return g.get_name() ==target;});
+    if (it != trip.end()) {
+        cout << "Found " << target << " (" << it->get_age() << ", " << it->get_color() << ")\n";
+    } 
+    else {
+        cout << target << " not found.\n";
     }
 }
 
 void senior_search(list<Goat> trip) {
-    bool rSeniors = any_of(trip.begin(), trip.end(), [](Goat &g) { return g.get_age() >25;});
+    bool rSeniors = any_of(trip.begin(), trip.end(), [](Goat &g) { return g.get_age() >18;});
     if (rSeniors) {
-        cout << "There are senior goats, of age greater than 25 years, on the trip" << endl;
+        cout << "There are senior goats, of age greater than 18 years, on the trip" << endl;
     }
     else 
         cout << "There are no senior goats on this trip." << endl;
@@ -194,6 +200,10 @@ void double_ages(list<Goat> &trip) {
     cout << "All ages have been doubled." << endl;
 }
 
+void sum_ages(list<Goat> trip) {
+    int total = accumulate(trip.begin(), trip.end(), 0, [](int sum, Goat &g) {return sum + g.get_age();});
+    cout << "Total age: " << total << endl;
+}
 void clear_trip(list<Goat> &trip) {
     trip.clear();
     cout << "Trip has been cleared of goats.\n";
