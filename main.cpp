@@ -86,6 +86,7 @@ int main() {
             case 8:
                 cout << "Doubling all ages..." << endl;
                 double_ages(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -107,7 +108,7 @@ int main_menu() {
     cout << "[6] Remove any duplicate goats\n";
     cout << "[7] Search for a goat.\n";
     cout << "[8] Double all goats' ages.\n";
-    cout << "[8] Quit\n";
+    cout << "[9] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
